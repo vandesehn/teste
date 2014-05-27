@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_cidades, only: [:new, :create, :edit, :update]
+
 
   # GET /users
   # GET /users.json
@@ -67,8 +69,12 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+   def set_cidades
+      @cidades = Cidade.all
+   end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:nome, :idade, :ativo)
+      params.require(:user).permit(:nome, :idade, :ativo, :cidade_id)
     end
 end

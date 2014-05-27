@@ -1,5 +1,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
+    <%= render "shared/erros", objeto: f.object %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
@@ -19,6 +21,14 @@
     <%= f.label :idade %><br>
     <%= f.number_field :idade %>
   </div>
+
+  <div class="field">
+    <%= f.label :cidade %><br>
+      <%= f.collection_select :cidade_id, @cidades, :id, :nome,
+      { prompt: "Selecione uma cidade" } %>
+  </div>
+
+
   <div class="field">
     <%= f.label :ativo %><br>
     <%= f.check_box :ativo %>
